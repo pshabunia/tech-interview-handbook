@@ -102,8 +102,8 @@ def dfs(matrix):
 
     visited.add((i, j))
     # Traverse neighbors.
-    for direction in directions:
-      next_i, next_j = i + direction[0], j + direction[1]
+    for step_i, step_j in directions:
+      next_i, next_j = i + step_i, j + step_j
       if 0 <= next_i < rows and 0 <= next_j < cols:
         # Add in question-specific checks, where relevant.
         traverse(next_i, next_j)
@@ -138,8 +138,8 @@ def bfs(matrix):
       if (curr_i, curr_j) not in visited:
         visited.add((curr_i, curr_j))
         # Traverse neighbors.
-        for direction in directions:
-          next_i, next_j = curr_i + direction[0], curr_j + direction[1]
+        for step_i, step_j in directions:
+          next_i, next_j = curr_i + step_i, curr_j + step_j
           if 0 <= next_i < rows and 0 <= next_j < cols:
             # Add in question-specific checks, where relevant.
             queue.append((next_i, next_j))
@@ -179,7 +179,7 @@ def graph_topo_sort(num_nodes, edges):
     for node_id in nodes.keys():
         if nodes[node_id]['in'] == 0:
             queue.append(node_id)
-    while len(queue):
+    while queue:
         node_id = queue.pop()
         for outgoing_id in nodes[node_id]['out']:
             nodes[outgoing_id]['in'] -= 1
